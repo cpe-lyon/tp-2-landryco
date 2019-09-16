@@ -7,7 +7,7 @@
 2. _Quelle variable d’environnement permet à la commandecdtapée sans argument de vous ramener dansvotre répertoire personnel?_
 `$HOME`
 
-3. _Explicitez le rôle des variables LANG,PWD,OLDPWD,SHELL et _.<br>
+3. _Explicitez le rôle des variables LANG,PWD,OLDPWD,SHELL et \_._ <br>
 `LANG`: La langue utilisé par l'utilisateur connecté<br>
 `PWD` : Le chemin actuel de l'utilisateur connecté<br>
 `OLDPWD` : Le chemin précédent de l'utilisateur connecté<br>
