@@ -38,5 +38,94 @@ Avec la commande `unset`, la variable sera totalement supprimée de la mémoire 
 10. __Utilisez la commande echo pour écrire exactement la phrase : $HOME = chemin (où chemin est votre dossier personnel d’après bash)__
 `echo '$HOME = '"$HOME"`
 
-11. __
+## Programmation Bash
 
+__Vous enregistrerez vos scripts dans un dossier script que vous créerez dans votre répertoire personnel.Tous les scripts sont bien entendu à tester. Ajoutez le chemin vers script à votre PATH de manière permanente.__
+
+`PATH=$PATH:~/script`
+(on ajoute cette ligne au ~/.bashrc)
+
+# Exercice 2. Contrôle de mot de passe
+
+__Écrivez un scripttestpwd.sh qui demande de saisir un mot de passe et vérifie s’il correspond ou non au contenu d’une variable PASSWORD dont le contenu est codé en dur dans le script. Le mot de passe saisi par l’utilisateur ne doit pas s’afficher.__
+
+```
+#!/bin/sh
+
+PASSWORD=Test123;
+
+read -p "Saisissez un mot de passe :" -s pwd
+
+if [ $pwd = $PASSWORD ]; then
+        echo -e "\nMot de passe correct"
+else
+        echo -e "\nMot de passe incorrect"
+fi
+```
+
+# Exercice 3. Expressions rationnelles
+
+__Ecrivez un script qui prend un paramètre et utilise la fonction suivante pour vérifier que ce paramètreest un nombre réel__
+
+```
+#!/bin/sh
+
+function is_number()
+{
+        re='^[+-]?[0-9]+([.][0-9]+)?$'
+        if ! [[ $1 =~ $re ]] ; then
+                return 1
+        else
+                return 0
+        fi
+}
+
+if is_number $1 ; then
+        echo -e "\nCorrect"
+else
+        echo -e "\nErreur"
+fi
+```
+
+# Exercice 4. Contrôle d’utilisateur
+
+__Écrivez un script qui vérifie l’existence d’un utilisateur dont le nom est donné en paramètre du script. Si lescript est appelé sans nom d’utilisateur, il affiche le message : ”Utilisation :nom_du_scriptnom_utilisateur”,oùnom_du_scriptest le nom de votre script récupéré automatiquement (si vous changez le nom de votrescript, le message doit changer automatiquement)__
+
+```
+#!/bin/sh
+
+if [ -z "$1" ]; then
+        echo -e "Utilisation : $(basename $0) nom_utilisateur";
+elif id "$1" >/dev/null 2>&1 ; then
+        echo -e "Exist";
+else
+        echo -e "Not Exist";
+fi
+```
+
+# Exercice 5. Factorielle
+
+__Écrivez un programme qui calcule la factorielle d’un entier naturel passé en paramètre (on supposera quel’utilisateur saisit toujours un entier naturel).__
+
+```
+#!/bin/sh
+
+fact() {
+        n=$1
+        if [ $n -eq 0 ]; then
+                echo 1
+        else
+                echo $(( n * `fact $(( n - 1 ))` ))
+        fi
+}
+
+echo "Resultat : $(fact $1)"
+```
+
+# Exercice 6. Le juste prix
+
+__Écrivez un script qui génère un nombre aléatoire entre 1 et 1000 et demande à l’utilisateur de le deviner.Le programme écrira ”C’est plus!”, ”C’est moins!” ou ”Gagné!” selon les cas (vous utiliserez$RANDOM).__
+
+```
+
+```
