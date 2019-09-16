@@ -129,3 +129,84 @@ __Écrivez un script qui génère un nombre aléatoire entre 1 et 1000 et demand
 ```
 
 ```
+
+# Exercice 7. Statistiques
+
+1. __Écrivez un script qui prend en paramètres trois entiers (entre -100 et +100) et affiche le min, le max
+et la moyenne. Vous pouvez réutiliser la fonction de l’exercice 3 pour vous assurer que les paramètres
+sont bien des entiers.__
+
+```
+function is_number()
+{
+ re='^[+-]?[0-9]+([.][0-9]+)?$'
+ if ! [[ $1 =~ $re ]] ; then
+  return 1
+ else
+  return 0
+ fi
+}
+
+MAX=-100;
+MIN=100;
+MOY=101;
+
+for i in $(seq 1 3);
+do
+        if is_number ${!i} ; then
+                if [ ${!i} -lt $MIN ]; then
+                        MIN=${!i}
+                fi
+                if [ ${!i} -gt $MAX ]; then
+                        MAX=${!i}
+                fi
+        else
+                echo "${!i} n'est pas un nombre entiers"
+        fi
+done
+MOY=$(($(($MAX+$MIN))/2))
+
+echo "MIN: $MIN / MOY: $MOY / MAX: $MAX";
+```
+
+2. __Généralisez le programme à un nombre quelconque de paramètres (pensez à SHIFT)__
+
+```
+function is_number()
+{
+ re='^[+-]?[0-9]+([.][0-9]+)?$'
+ if ! [[ $1 =~ $re ]] ; then
+  return 1
+ else
+  return 0
+ fi
+}
+
+MAX=-100;
+MIN=100;
+MOY=101;
+
+while (("$#"));
+do
+        if is_number $1 ; then
+                if [ $1 -lt $MIN ]; then
+                        MIN=$1
+                fi
+                if [ $1 -gt $MAX ]; then
+                        MAX=$1
+                fi
+        else
+                echo "$1 n'est pas un nombre entiers"
+        fi
+        shift
+done
+MOY=$(($(($MAX+$MIN))/2))
+echo "MIN: $MIN / MOY: $MOY / MAX: $MAX";
+```
+
+3. __Modifiez votre programme pour que les notes ne soient plus données en paramètres, mais saisies et
+stockées au fur et à mesure dans un tableau.__
+
+```
+
+```
