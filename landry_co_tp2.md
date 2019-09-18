@@ -225,5 +225,46 @@ echo "MIN: $MIN / MOY: $MOY / MAX: $MAX";
 stockées au fur et à mesure dans un tableau.__
 
 ```
+function is_number()
+{
+ re='^[+-]?[0-9]+([.][0-9]+)?$'
+ if ! [[ $1 =~ $re ]] ; then
+  return 1
+ else
+  return 0
+ fi
+}
 
+GET=0;
+MAX=-100;
+MIN=100;
+MOY=101;
+
+TAB=();
+
+while [ $GET -lt 101 ] && [ $GET -gt -101 ]
+do
+        read -p 'Saisissez la note : ' GET
+
+        if [ $GET -lt 101 ] && [ $GET -gt -101 ]; then
+                if is_number $GET ; then
+
+                        TSIZE=${#TAB[*]}
+                        TAB[$TSIZE+1]=$GET
+
+                        if [ $GET -lt $MIN ]; then
+                                MIN=$GET
+                        fi
+                        if [ $GET -gt $MAX ]; then
+                                MAX=$GET
+                        fi
+                else
+                        echo "$GET n'est pas un nombre entiers"
+                fi
+        fi
+done
+echo "Generate Table ...";
+echo ${TAB[*]};
+MOY=$(($(($MAX+$MIN))/2))
+echo "MIN: $MIN / MOY: $MOY / MAX: $MAX";
 ```
