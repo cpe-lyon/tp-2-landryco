@@ -127,7 +127,24 @@ echo "Resultat : $(fact $1)"
 __Écrivez un script qui génère un nombre aléatoire entre 1 et 1000 et demande à l’utilisateur de le deviner.Le programme écrira ”C’est plus!”, ”C’est moins!” ou ”Gagné!” selon les cas (vous utiliserez$RANDOM).__
 
 ```
+#!/bin/bash
 
+RDM=$((1 + RANDOM % 1000));
+REP=0;
+
+read -p 'Saisissez un nombre entre 1 et 1000 : '
+
+while [ $REP -ne $RDM ];
+do
+        if [ $REP -gt $RDM ]; then
+                read -p 'Le nombre est trop grand : ' REP
+        elif [ $REP -lt $RDM ]
+        then
+                read -p 'Le nombre est trop petit : ' REP
+        fi
+done
+
+echo "Bravo ! Vous avez trouvé";
 ```
 
 # Exercice 7. Statistiques
