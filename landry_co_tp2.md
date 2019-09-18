@@ -225,6 +225,8 @@ echo "MIN: $MIN / MOY: $MOY / MAX: $MAX";
 stockées au fur et à mesure dans un tableau.__
 
 ```
+#!/bin/bash
+
 function is_number()
 {
  re='^[+-]?[0-9]+([.][0-9]+)?$'
@@ -238,7 +240,7 @@ function is_number()
 GET=0;
 MAX=-100;
 MIN=100;
-MOY=101;
+MOY=0;
 
 TAB=();
 
@@ -258,13 +260,16 @@ do
                         if [ $GET -gt $MAX ]; then
                                 MAX=$GET
                         fi
+
+                        MOY=$(($MOY+$GET))
                 else
                         echo "$GET n'est pas un nombre entiers"
                 fi
         fi
 done
-echo "Generate Table ...";
+TSIZE=${#TAB[*]}
+echo "Generate Table ... ($TSIZE value(s))";
 echo ${TAB[*]};
-MOY=$(($(($MAX+$MIN))/2))
+MOY=$(($MOY/$TSIZE))
 echo "MIN: $MIN / MOY: $MOY / MAX: $MAX";
 ```
