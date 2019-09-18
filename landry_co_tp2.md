@@ -166,7 +166,7 @@ function is_number()
 
 MAX=-100;
 MIN=100;
-MOY=101;
+MOY=0;
 
 for i in $(seq 1 3);
 do
@@ -177,11 +177,13 @@ do
                 if [ ${!i} -gt $MAX ]; then
                         MAX=${!i}
                 fi
+                
+                MOY=$(($MOY+${!i}))
         else
                 echo "${!i} n'est pas un nombre entiers"
         fi
 done
-MOY=$(($(($MAX+$MIN))/2))
+MOY=$(($MOY/3))
 
 echo "MIN: $MIN / MOY: $MOY / MAX: $MAX";
 ```
@@ -201,7 +203,8 @@ function is_number()
 
 MAX=-100;
 MIN=100;
-MOY=101;
+MOY=0;
+NBVALUE=0;
 
 while (("$#"));
 do
@@ -212,12 +215,14 @@ do
                 if [ $1 -gt $MAX ]; then
                         MAX=$1
                 fi
+                NBVALUE=$(($NBVALUE+1));
+                MOY=$((MOY+$1));
         else
                 echo "$1 n'est pas un nombre entiers"
         fi
         shift
 done
-MOY=$(($(($MAX+$MIN))/2))
+MOY=$(($MOY/$NBVALUE))
 echo "MIN: $MIN / MOY: $MOY / MAX: $MAX";
 ```
 
